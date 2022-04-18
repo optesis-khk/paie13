@@ -1,0 +1,68 @@
+<odoo>
+    <record id="optesis_payroll_input_form" model="ir.ui.view">
+            <field name="name">Entrées des fiches de paie des employés</field>
+            <field name="model">optesis.payslip.input</field>
+            <field name="arch" type="xml">
+                <form string="Employee Payslip Inputs">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="input_id"/>
+                                <field name="employee_id" />
+                                <field name="value"/>
+                            </group>
+                            <group>
+                                <label for="date_from" string="Policy Period"/>
+                          			<div>
+                          				<field name="date_from" class="oe_inline" on_change="1" />
+                          				  -
+                          				<field name="date_to" class="oe_inline" on_change="1" />
+                          			</div>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+        <record id="optesis_payslip_input_tree" model="ir.ui.view">
+            <field name="name">Entrées des fiches de paie des employés</field>
+            <field name="model">optesis.payslip.input</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Bonus">
+                    <field name="input_id"/>
+                     <field name="employee_id"/>
+                    <field name="date_from" />
+				    <field name="date_to"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+    
+        <record id="view_optesis_payslip_input_filter" model="ir.ui.view">
+            <field name="name">optesis.payslip.input.filter</field>
+            <field name="model">optesis.payslip.input</field>
+            <field name="arch" type="xml">
+                <search string="Entrées des fiches de paie Recherche">
+                    <field name="input_id" string="Entrée"/>
+                    <field name="employee_id" string="Employé"/>
+                    <group col="8" colspan="4" expand="0" string="Group By">
+                        <filter string="Employé" name="employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Entrée" name="input_id" context="{'group_by':'input_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    
+        <record id="optesis_payslip_input_action" model="ir.actions.act_window">
+            <field name="name">Entrées des fiches de paie</field>
+            <field name="res_model">optesis.payslip.input</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+      <menuitem id="payslip_input_menu"
+         parent="hr_payroll.menu_hr_payroll_configuration" action="optesis_payslip_input_action"
+         sequence="19"/>
+</odoo>
